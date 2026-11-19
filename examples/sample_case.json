@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0", "id": "EXAMPLE-VOI", "objective": "Decide whether to run one inexpensive test before selecting a production architecture",
+  "decision": {
+    "kind": "research", "stakes": "medium", "reversibility": "partial", "uncertainty": "estimable",
+    "alternatives": ["Commit to candidate architecture", "Run a bounded benchmark and then choose"]
+  },
+  "signals": {"information_can_change_action": true, "information_obtainable": true},
+  "constraints": ["Do not delay the release beyond the agreed deadline"],
+  "evidence_refs": []
+}

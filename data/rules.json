@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "RULE-RUIN-001", "status": "candidate",
+      "trigger": "Potential irreversible loss of continued ability to act",
+      "policy": "Impose hard exposure constraints before comparing expected benefits",
+      "preconditions": ["Credible catastrophic loss state identified"],
+      "do_not_use_when": ["Trivial downside mislabeled catastrophic", "Risk has already been eliminated"],
+      "concept_refs": ["C0062", "C0063", "C0052"],
+      "evidence_status": "GENERAL_THEORY", "tests": ["ruin-vs-expectation"], "revision_history": []
+    },
+    {
+      "rule_id": "RULE-VOI-001", "status": "candidate",
+      "trigger": "New data might improve a pending decision",
+      "policy": "Collect data only when it might change action enough to justify cost and delay",
+      "preconditions": ["Decision alternatives defined", "Information obtainable before deadline"],
+      "do_not_use_when": ["No plausible observation changes action"],
+      "concept_refs": ["C0056", "C0058", "C0059"],
+      "evidence_status": "GENERAL_THEORY", "tests": ["information-can-flip", "information-cannot-flip"], "revision_history": []
+    },
+    {
+      "rule_id": "RULE-HYPER-001", "status": "candidate",
+      "trigger": "Other actors adapt and have evidenced differences in perceived game structure",
+      "policy": "Compare documented perceived action sets and payoffs instead of asserting hidden motives",
+      "preconditions": ["Strategic interdependence", "Specific evidence of perception mismatch"],
+      "do_not_use_when": ["Only ordinary uncertainty about someone else's intentions"],
+      "concept_refs": ["C0084", "C0087"],
+      "evidence_status": "CROSS_BOOK_INFERENCE", "tests": ["strategic-without-hypergame", "evidenced-hypergame"], "revision_history": []
+    }
+  ]
+}

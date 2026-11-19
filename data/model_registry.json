@@ -1,0 +1,271 @@
+{
+  "schema_version": "1.0",
+  "models": [
+    {
+      "id": "ROBUST_CHOICE",
+      "stage": "L3",
+      "theory_type": "normative",
+      "method": "Compare admissible actions across plausible scenarios and downside constraints; use sensitivity analysis.",
+      "stop_when": "Stop when an action remains acceptable across plausible states or a review deadline arrives.",
+      "failure_mode": "Robustness can sacrifice high average benefits; scenario boundaries are assumptions.",
+      "concept_refs": [
+        "C0050",
+        "C0051",
+        "C0052",
+        "C0062"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "SATISFICING",
+      "stage": "L3",
+      "theory_type": "normative",
+      "method": "Set minimal acceptable criteria and a bounded search cost; select a qualifying option.",
+      "stop_when": "Stop at the first qualifying option or the precommitted budget.",
+      "failure_mode": "Poor thresholds can exclude important value.",
+      "concept_refs": [
+        "C0045",
+        "C0059"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "EXPECTED_UTILITY",
+      "stage": "L3",
+      "theory_type": "normative",
+      "method": "Assess probabilities, utility of outcomes, and feasibility; compare expected utility.",
+      "stop_when": "Stop when the preferred choice survives sensitivity checks.",
+      "failure_mode": "Probabilities and preferences may be unjustified; ruin is not offset by averages.",
+      "concept_refs": [
+        "C0039",
+        "C0047"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "VALUE_OF_INFORMATION",
+      "stage": "L3",
+      "theory_type": "normative",
+      "method": "Identify information that can change action; compare expected value with collection and delay costs.",
+      "stop_when": "Stop when marginal decision value does not justify cost or deadline passes.",
+      "failure_mode": "Entropy reduction is not necessarily decision value; EVSI requires a test model.",
+      "concept_refs": [
+        "C0056",
+        "C0058",
+        "C0059"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "SEQUENTIAL_PLANNING",
+      "stage": "L3",
+      "theory_type": "normative",
+      "method": "Define states, transitions, rewards and horizon; compare policies via backward induction where justified.",
+      "stop_when": "Stop when policy differences are robust to transition uncertainty or cost bounds bind.",
+      "failure_mode": "Incorrect state or transition model invalidates Bellman results.",
+      "concept_refs": [
+        "C0070",
+        "C0071"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "STAKEHOLDER_DIAGNOSIS",
+      "stage": "L3",
+      "theory_type": "descriptive",
+      "method": "Map actors, stated interests, actual authority and available evidence without assuming strategic adaptation.",
+      "stop_when": "Stop when actors and material constraints are mapped enough for a choice.",
+      "failure_mode": "Mistaking unknown incentives for deliberate strategy.",
+      "concept_refs": [
+        "C0084"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "GAME_THEORY",
+      "stage": "L3",
+      "theory_type": "normative",
+      "method": "Specify players, action sets, payoffs, information and best responses; test alternative games.",
+      "stop_when": "Stop after identifying plausible responses and robust responses to them.",
+      "failure_mode": "Assumed rationality and invented payoffs cause false precision.",
+      "concept_refs": [
+        "C0084",
+        "C0085",
+        "C0087"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "HYPERGAME",
+      "stage": "L3",
+      "theory_type": "exploratory",
+      "method": "Represent at least two evidenced perceived games; identify strategic disagreement and tests of perception.",
+      "stop_when": "Stop when perception uncertainty has been bounded enough to select a safe strategy.",
+      "failure_mode": "Unfalsifiable second-order mind-reading is not evidence.",
+      "concept_refs": [
+        "C0084",
+        "C0115"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "SYSTEM_DYNAMICS",
+      "stage": "L3",
+      "theory_type": "mechanistic",
+      "method": "Map stocks, flows, reinforcing and balancing loops, delays and observable interventions.",
+      "stop_when": "Stop after a feedback hypothesis yields testable predictions and safe intervention choices.",
+      "failure_mode": "A causal-loop drawing is not proof of causation.",
+      "concept_refs": [
+        "C0020"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "CAUSAL_DIAGNOSIS",
+      "stage": "L3",
+      "theory_type": "mechanistic",
+      "method": "Specify outcome, possible causes, confounders and rival mechanisms; seek discriminating tests.",
+      "stop_when": "Stop when evidence supports an intervention or test plan.",
+      "failure_mode": "Observational correlations do not establish causality.",
+      "concept_refs": [
+        "C0020",
+        "C0021"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "HABIT_INTERVENTION",
+      "stage": "L3",
+      "theory_type": "descriptive",
+      "method": "Map observed cue, routine and reward; change one variable and measure recurrence.",
+      "stop_when": "Stop/revise when repeated observed behavior shows no improvement.",
+      "failure_mode": "Not every repeated failure is a habit.",
+      "concept_refs": [
+        "C0061"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "BEHAVIOR_DIAGNOSIS",
+      "stage": "L3",
+      "theory_type": "descriptive",
+      "method": "Compare skill, environment, incentives, health, choice and cue explanations before choosing a mechanism.",
+      "stop_when": "Stop when an observation or small experiment distinguishes plausible mechanisms.",
+      "failure_mode": "Pathologizing rational or constraint-driven behavior.",
+      "concept_refs": [
+        "C0022"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "DELIBERATE_PRACTICE",
+      "stage": "L3",
+      "theory_type": "mechanistic",
+      "method": "Target the measured subskill, practice just beyond current performance, obtain feedback and retest.",
+      "stop_when": "Stop or retarget when test performance stabilizes or transfers.",
+      "failure_mode": "Repeated practice without useful feedback can entrench errors.",
+      "concept_refs": [
+        "C0004"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "SKILL_DIAGNOSIS",
+      "stage": "L3",
+      "theory_type": "mechanistic",
+      "method": "Use retrieval and transfer tests to locate knowledge, retrieval, reasoning or execution gaps.",
+      "stop_when": "Stop when a specific skill deficit is reproducible.",
+      "failure_mode": "A single poor score may reflect fatigue or measurement noise.",
+      "concept_refs": [
+        "C0003"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "ATTENTION_DESIGN",
+      "stage": "L3",
+      "theory_type": "mechanistic",
+      "method": "Reduce observed switching triggers; reserve uninterrupted work and compare outcome with baseline.",
+      "stop_when": "Stop/revise after comparable work blocks show no gain.",
+      "failure_mode": "Deep work is not superior for every task; urgent interruptions may be justified.",
+      "concept_refs": [
+        "C0078"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "ATTENTION_AUDIT",
+      "stage": "L3",
+      "theory_type": "descriptive",
+      "method": "Log task starts, interruptions and outputs; identify whether attention is the bottleneck.",
+      "stop_when": "Stop when a repeated mechanism is observed or alternate constraint dominates.",
+      "failure_mode": "Subjective distraction reports can misclassify bottlenecks.",
+      "concept_refs": [
+        "C0139"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "SECRETARY_STOPPING",
+      "stage": "L3",
+      "theory_type": "normative",
+      "method": "With random order, no recall and fixed horizon, sample about 1/e then select next record breaker.",
+      "stop_when": "Stop upon first qualifying candidate or end of finite horizon.",
+      "failure_mode": "The ~37% policy maximizes selecting best under strict assumptions, not welfare.",
+      "concept_refs": [
+        "C0064",
+        "C0065"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    },
+    {
+      "id": "GENERAL_STOPPING",
+      "stage": "L3",
+      "theory_type": "normative",
+      "method": "Model recall, arrival distribution, utility, urgency and search costs; derive a contextual threshold.",
+      "stop_when": "Stop when next-search value falls below waiting cost or a deadline arrives.",
+      "failure_mode": "A constant universal fraction is not justified.",
+      "concept_refs": [
+        "C0064",
+        "C0059"
+      ],
+      "evidence_status": "GENERAL_THEORY",
+      "status": "candidate",
+      "version": "1.0.0"
+    }
+  ]
+}
