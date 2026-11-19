@@ -1,4 +1,14 @@
-# brain-of-shuchii — Stage I: Decision Reasoning Kernel
+# brain-of-shuchii — Evolving knowledge and decision architecture
+
+**Canonical GitHub memory for theory, research, discourse, lateral thinking, models, decisions and evidence-based self-correction.** The active conversation is the thinking surface; this repository is the durable, inspectable reference. The Python reasoning kernel is the first implementation component, not the full purpose of this project.
+
+- [Knowledge and reasoning charter](docs/KNOWLEDGE_CHARTER.md) — research domains, evidence, dispute preservation and knowledge evolution.
+- [Autonomous maintainer policy](docs/MAINTAINER_POLICY.md) — permitted repository maintenance, self-review versus approval, CI and merge gates.
+- [Stage I technical architecture](docs/ARCHITECTURE.md) — runnable decision-method router and evaluation contracts.
+
+**Current development:** Stage I is implemented. Importing and reconciling B1–B5 and the master concept atlas is a later stage, not yet completed. GitHub updates occur only when authorized tools are actively invoked; this project does not imply background or continuous memory access.
+
+## Stage I: Decision Reasoning Kernel
 
 An inspectable, evolving **decision-method router**. Its purpose is to select *how to analyze a problem*, not to impersonate a mind, automatically select a life decision, or warehouse unrestricted chat transcripts.
 
