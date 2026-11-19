@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ganesh96/brain-of-shuchii/blob/main/schemas/stage1.schema.json",
+  "title": "Stage I Decision Kernel Interfaces",
+  "version": "1.0.0",
+  "$defs": {
+    "problem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "id", "objective", "decision"],
+      "properties": {
+        "schema_version": {"const": "1.0"},
+        "id": {"type": "string", "minLength": 1},
+        "objective": {"type": "string", "minLength": 1},
+        "decision": {
+          "type": "object", "additionalProperties": false,
+          "required": ["kind", "stakes", "reversibility", "uncertainty", "alternatives"],
+          "properties": {
+            "kind": {"enum": ["one_shot", "research", "sequential", "strategic", "system", "behavior", "learning", "focus", "search"]},
+            "stakes": {"enum": ["low", "medium", "high", "critical"]},
+            "reversibility": {"enum": ["reversible", "partial", "irreversible"]},
+            "uncertainty": {"enum": ["known", "estimable", "ambiguous"]},
+            "alternatives": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}}
+          }
+        },
+        "signals": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "probabilities_defensible": {"type": "boolean"},
+            "information_can_change_action": {"type": "boolean"},
+            "information_obtainable": {"type": "boolean"},
+            "opponent_adaptive": {"type": "boolean"},
+            "perception_mismatch_evidence": {"type": "boolean"},
+            "feedback_loop_evidence": {"type": "boolean"},
+            "behavior_cue_observed": {"type": "boolean"},
+            "skill_gap_measured": {"type": "boolean"},
+            "attention_switch_cost_observed": {"type": "boolean"},
+            "search_random_order": {"type": "boolean"},
+            "search_no_recall": {"type": "boolean"},
+            "search_fixed_horizon": {"type": "boolean"},
+            "search_best_only_objective": {"type": "boolean"},
+            "risk_of_ruin": {"type": "boolean"},
+            "evidence_independent": {"type": "boolean"},
+            "emotionally_activated": {"type": "boolean"},
+            "irreversible_externalities": {"type": "boolean"}
+          }
+        },
+        "constraints": {"type": "array", "items": {"type": "string"}},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "model": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "stage", "theory_type", "method", "stop_when", "failure_mode", "concept_refs", "evidence_status", "status", "version"],
+      "properties": {
+        "id": {"type": "string", "minLength": 2},
+        "stage": {"const": "L3"},
+        "theory_type": {"enum": ["normative", "descriptive", "mechanistic", "exploratory"]},
+        "method": {"type": "string", "minLength": 10},
+        "stop_when": {"type": "string", "minLength": 10},
+        "failure_mode": {"type": "string", "minLength": 10},
+        "concept_refs": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^C[0-9]{4}$"}},
+        "evidence_status": {"enum": ["GENERAL_THEORY", "DIRECT_VERIFIED", "CROSS_BOOK_INFERENCE", "OPEN_QUESTION"]},
+        "status": {"enum": ["candidate", "tested", "operational", "retired"]},
+        "version": {"type": "string", "minLength": 3}
+      }
+    },
+    "rule": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rule_id", "status", "trigger", "policy", "preconditions", "do_not_use_when", "concept_refs", "evidence_status", "tests", "revision_history"],
+      "properties": {
+        "rule_id": {"type": "string", "pattern": "^RULE-[A-Z0-9-]+$"},
+        "status": {"enum": ["candidate", "tested", "operational", "retired"]},
+        "trigger": {"type": "string"},
+        "policy": {"type": "string"},
+        "preconditions": {"type": "array", "items": {"type": "string"}},
+        "do_not_use_when": {"type": "array", "items": {"type": "string"}},
+        "concept_refs": {"type": "array", "items": {"type": "string", "pattern": "^C[0-9]{4}$"}},
+        "evidence_status": {"enum": ["GENERAL_THEORY", "DIRECT_VERIFIED", "CROSS_BOOK_INFERENCE", "OPEN_QUESTION"]},
+        "tests": {"type": "array"},
+        "revision_history": {"type": "array"}
+      }
+    },
+    "evaluation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "case", "expected"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "case": {"$ref": "#/$defs/problem"},
+        "expected": {
+          "type": "object", "additionalProperties": false, "required": ["primary_model"],
+          "properties": {
+            "primary_model": {"type": "string"},
+            "depth": {"enum": ["F", "M", "R"]},
+            "rejected_models_contain": {"type": "array", "items": {"type": "string"}},
+            "supporting_models_contain": {"type": "array", "items": {"type": "string"}},
+            "guardrail_contains": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}

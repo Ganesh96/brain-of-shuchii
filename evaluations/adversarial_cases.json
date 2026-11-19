@@ -1,0 +1,697 @@
+{
+  "schema_version": "1.0",
+  "suite": "stage1-adversarial-routing",
+  "cases": [
+    {
+      "name": "strict-secretary-problem",
+      "case": {
+        "schema_version": "1.0",
+        "id": "strict-secretary-problem",
+        "objective": "Choose a defensible method for strict secretary problem",
+        "decision": {
+          "kind": "search",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "search_random_order": true,
+          "search_no_recall": true,
+          "search_fixed_horizon": true,
+          "search_best_only_objective": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "SECRETARY_STOPPING",
+        "depth": "F"
+      },
+      "rationale": "Only the full classical assumptions justify the 1/e exploration cutoff."
+    },
+    {
+      "name": "job-search-with-recall",
+      "case": {
+        "schema_version": "1.0",
+        "id": "job-search-with-recall",
+        "objective": "Choose a defensible method for job search with recall",
+        "decision": {
+          "kind": "search",
+          "stakes": "high",
+          "reversibility": "reversible",
+          "uncertainty": "ambiguous",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "search_fixed_horizon": true,
+          "search_best_only_objective": false,
+          "search_no_recall": false
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "GENERAL_STOPPING",
+        "rejected_models_contain": [
+          "SECRETARY_STOPPING"
+        ]
+      },
+      "rationale": "Jobs can reopen and utility differs from maximizing chance of absolute best."
+    },
+    {
+      "name": "risk-of-ruin-vs-average",
+      "case": {
+        "schema_version": "1.0",
+        "id": "risk-of-ruin-vs-average",
+        "objective": "Choose a defensible method for risk of ruin vs average",
+        "decision": {
+          "kind": "one_shot",
+          "stakes": "high",
+          "reversibility": "reversible",
+          "uncertainty": "estimable",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "probabilities_defensible": true,
+          "risk_of_ruin": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "ROBUST_CHOICE",
+        "guardrail_contains": "RUIN_VETO",
+        "depth": "R"
+      },
+      "rationale": "Unacceptable downside is a feasibility constraint; expected utility must not override it."
+    },
+    {
+      "name": "ambiguous-expected-value",
+      "case": {
+        "schema_version": "1.0",
+        "id": "ambiguous-expected-value",
+        "objective": "Choose a defensible method for ambiguous expected value",
+        "decision": {
+          "kind": "one_shot",
+          "stakes": "high",
+          "reversibility": "reversible",
+          "uncertainty": "ambiguous",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {},
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "ROBUST_CHOICE",
+        "rejected_models_contain": [
+          "EXPECTED_UTILITY"
+        ]
+      },
+      "rationale": "Do not produce invented event probabilities from narrative confidence."
+    },
+    {
+      "name": "measurable-one-shot-utility",
+      "case": {
+        "schema_version": "1.0",
+        "id": "measurable-one-shot-utility",
+        "objective": "Choose a defensible method for measurable one shot utility",
+        "decision": {
+          "kind": "one_shot",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "estimable",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "probabilities_defensible": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "EXPECTED_UTILITY"
+      },
+      "rationale": "Known utilities and defensible odds support expected utility."
+    },
+    {
+      "name": "cheap-reversible-choice",
+      "case": {
+        "schema_version": "1.0",
+        "id": "cheap-reversible-choice",
+        "objective": "Choose a defensible method for cheap reversible choice",
+        "decision": {
+          "kind": "one_shot",
+          "stakes": "low",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {},
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "SATISFICING",
+        "depth": "F"
+      },
+      "rationale": "Avoid unbounded deliberation on trivial choices."
+    },
+    {
+      "name": "information-can-flip",
+      "case": {
+        "schema_version": "1.0",
+        "id": "information-can-flip",
+        "objective": "Choose a defensible method for information can flip",
+        "decision": {
+          "kind": "research",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "information_can_change_action": true,
+          "information_obtainable": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "VALUE_OF_INFORMATION"
+      },
+      "rationale": "Source collection is justified by potential action reversal."
+    },
+    {
+      "name": "information-cannot-flip",
+      "case": {
+        "schema_version": "1.0",
+        "id": "information-cannot-flip",
+        "objective": "Choose a defensible method for information cannot flip",
+        "decision": {
+          "kind": "research",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "information_can_change_action": false,
+          "information_obtainable": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "SATISFICING",
+        "rejected_models_contain": [
+          "VALUE_OF_INFORMATION"
+        ]
+      },
+      "rationale": "Uncertainty reduction without decision change is not EVSI."
+    },
+    {
+      "name": "information-unobtainable-before-deadline",
+      "case": {
+        "schema_version": "1.0",
+        "id": "information-unobtainable-before-deadline",
+        "objective": "Choose a defensible method for information unobtainable before deadline",
+        "decision": {
+          "kind": "research",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "information_can_change_action": true,
+          "information_obtainable": false
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "SATISFICING",
+        "rejected_models_contain": [
+          "VALUE_OF_INFORMATION"
+        ]
+      },
+      "rationale": "Information too late cannot improve the pending action."
+    },
+    {
+      "name": "sequential-state-transitions",
+      "case": {
+        "schema_version": "1.0",
+        "id": "sequential-state-transitions",
+        "objective": "Choose a defensible method for sequential state transitions",
+        "decision": {
+          "kind": "sequential",
+          "stakes": "high",
+          "reversibility": "reversible",
+          "uncertainty": "estimable",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {},
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "SEQUENTIAL_PLANNING",
+        "depth": "M"
+      },
+      "rationale": "Current action changes the distribution of future states."
+    },
+    {
+      "name": "strategic-without-hypergame",
+      "case": {
+        "schema_version": "1.0",
+        "id": "strategic-without-hypergame",
+        "objective": "Choose a defensible method for strategic without hypergame",
+        "decision": {
+          "kind": "strategic",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "opponent_adaptive": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "GAME_THEORY",
+        "rejected_models_contain": [
+          "HYPERGAME"
+        ]
+      },
+      "rationale": "Uncertainty about motives alone cannot justify hypergame mind-reading."
+    },
+    {
+      "name": "evidenced-hypergame",
+      "case": {
+        "schema_version": "1.0",
+        "id": "evidenced-hypergame",
+        "objective": "Choose a defensible method for evidenced hypergame",
+        "decision": {
+          "kind": "strategic",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "opponent_adaptive": true,
+          "perception_mismatch_evidence": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "HYPERGAME",
+        "supporting_models_contain": [
+          "GAME_THEORY"
+        ]
+      },
+      "rationale": "Observed mismatch in assumed options warrants competing perceived-game models."
+    },
+    {
+      "name": "not-a-strategic-game",
+      "case": {
+        "schema_version": "1.0",
+        "id": "not-a-strategic-game",
+        "objective": "Choose a defensible method for not a strategic game",
+        "decision": {
+          "kind": "strategic",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "opponent_adaptive": false
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "STAKEHOLDER_DIAGNOSIS",
+        "rejected_models_contain": [
+          "GAME_THEORY",
+          "HYPERGAME"
+        ]
+      },
+      "rationale": "The mere presence of other parties is not strategic interdependence."
+    },
+    {
+      "name": "system-feedback-observed",
+      "case": {
+        "schema_version": "1.0",
+        "id": "system-feedback-observed",
+        "objective": "Choose a defensible method for system feedback observed",
+        "decision": {
+          "kind": "system",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "feedback_loop_evidence": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "SYSTEM_DYNAMICS"
+      },
+      "rationale": "Observable feedback and delay justify a systems model."
+    },
+    {
+      "name": "system-feedback-not-established",
+      "case": {
+        "schema_version": "1.0",
+        "id": "system-feedback-not-established",
+        "objective": "Choose a defensible method for system feedback not established",
+        "decision": {
+          "kind": "system",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "feedback_loop_evidence": false
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "CAUSAL_DIAGNOSIS",
+        "rejected_models_contain": [
+          "SYSTEM_DYNAMICS"
+        ]
+      },
+      "rationale": "Do not promote a feedback diagram to confirmed mechanism."
+    },
+    {
+      "name": "habit-with-cue-evidence",
+      "case": {
+        "schema_version": "1.0",
+        "id": "habit-with-cue-evidence",
+        "objective": "Choose a defensible method for habit with cue evidence",
+        "decision": {
+          "kind": "behavior",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "behavior_cue_observed": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "HABIT_INTERVENTION"
+      },
+      "rationale": "Observed cue response can support habit substitution experiments."
+    },
+    {
+      "name": "failure-is-not-necessarily-habit",
+      "case": {
+        "schema_version": "1.0",
+        "id": "failure-is-not-necessarily-habit",
+        "objective": "Choose a defensible method for failure is not necessarily habit",
+        "decision": {
+          "kind": "behavior",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "ambiguous",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {},
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "BEHAVIOR_DIAGNOSIS",
+        "rejected_models_contain": [
+          "HABIT_INTERVENTION"
+        ]
+      },
+      "rationale": "Consider incentives, constraints and exhaustion before assuming learned habit."
+    },
+    {
+      "name": "learning-with-measured-gap",
+      "case": {
+        "schema_version": "1.0",
+        "id": "learning-with-measured-gap",
+        "objective": "Choose a defensible method for learning with measured gap",
+        "decision": {
+          "kind": "learning",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "skill_gap_measured": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "DELIBERATE_PRACTICE"
+      },
+      "rationale": "Corrective practice needs a measurable target and feedback."
+    },
+    {
+      "name": "learning-without-gap",
+      "case": {
+        "schema_version": "1.0",
+        "id": "learning-without-gap",
+        "objective": "Choose a defensible method for learning without gap",
+        "decision": {
+          "kind": "learning",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {},
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "SKILL_DIAGNOSIS",
+        "rejected_models_contain": [
+          "DELIBERATE_PRACTICE"
+        ]
+      },
+      "rationale": "More deliberate practice is not diagnosed until bottleneck known."
+    },
+    {
+      "name": "switch-cost-observed",
+      "case": {
+        "schema_version": "1.0",
+        "id": "switch-cost-observed",
+        "objective": "Choose a defensible method for switch cost observed",
+        "decision": {
+          "kind": "focus",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "attention_switch_cost_observed": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "ATTENTION_DESIGN"
+      },
+      "rationale": "Demonstrated interruptions support environment redesign."
+    },
+    {
+      "name": "focus-problem-unproven",
+      "case": {
+        "schema_version": "1.0",
+        "id": "focus-problem-unproven",
+        "objective": "Choose a defensible method for focus problem unproven",
+        "decision": {
+          "kind": "focus",
+          "stakes": "medium",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {},
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "ATTENTION_AUDIT"
+      },
+      "rationale": "Audit first; perceived focus failure can conceal unclear priorities."
+    },
+    {
+      "name": "emotion-and-irreversible-commit",
+      "case": {
+        "schema_version": "1.0",
+        "id": "emotion-and-irreversible-commit",
+        "objective": "Choose a defensible method for emotion and irreversible commit",
+        "decision": {
+          "kind": "one_shot",
+          "stakes": "high",
+          "reversibility": "irreversible",
+          "uncertainty": "ambiguous",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "emotionally_activated": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "ROBUST_CHOICE",
+        "guardrail_contains": "HOT_STATE_REVIEW",
+        "depth": "R"
+      },
+      "rationale": "Independent review protects against costly arousal-sensitive decisions."
+    },
+    {
+      "name": "ruin-in-system-intervention",
+      "case": {
+        "schema_version": "1.0",
+        "id": "ruin-in-system-intervention",
+        "objective": "Choose a defensible method for ruin in system intervention",
+        "decision": {
+          "kind": "system",
+          "stakes": "critical",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "feedback_loop_evidence": true,
+          "risk_of_ruin": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "SYSTEM_DYNAMICS",
+        "supporting_models_contain": [
+          "ROBUST_CHOICE"
+        ],
+        "guardrail_contains": "RUIN_VETO",
+        "depth": "R"
+      },
+      "rationale": "Risk constraint applies even when the primary model is systems dynamics."
+    },
+    {
+      "name": "irreversible-externalities-low-stakes-label",
+      "case": {
+        "schema_version": "1.0",
+        "id": "irreversible-externalities-low-stakes-label",
+        "objective": "Choose a defensible method for irreversible externalities low stakes label",
+        "decision": {
+          "kind": "one_shot",
+          "stakes": "low",
+          "reversibility": "reversible",
+          "uncertainty": "known",
+          "alternatives": [
+            "Act now",
+            "Gather evidence or select alternate action"
+          ]
+        },
+        "signals": {
+          "irreversible_externalities": true
+        },
+        "constraints": [],
+        "evidence_refs": []
+      },
+      "expected": {
+        "primary_model": "SATISFICING",
+        "guardrail_contains": "COMMITMENT_GATE"
+      },
+      "rationale": "Externalities must be surfaced even if stakes were mislabeled low; governance remains separate from model routing."
+    }
+  ]
+}
